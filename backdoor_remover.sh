@@ -74,6 +74,8 @@ function complete_scan(){
     else
       if [ "$si_no" = no ]; then # Si no se decide elimar se sale del proceso con una alerta.
       echo -e "${redColor}[!] No se Eliminaron las conexiones por favor tomar Precauciones!${endColor}"
+      tput cnorm
+      exit 1
       fi
     fi
       if [ ! -z "$pdi" ]; then # Si el proceso de eliminacion fue exitoso la variable quedara vacia y se procede a mostrar los archivos maliciosos.
@@ -92,7 +94,7 @@ function complete_scan(){
 declare -i parameter_counter=0
 
 # Aqui indicaremos todas las opciones que llevara nuestro programa.
-while getopts "hrc" arg; do
+while getopts "hc" arg; do
   case $arg in
     h) ;;
     c) let parameter_counter+=1;;
@@ -107,6 +109,6 @@ else
   help_panel
 fi
 
-tput cnorm # Salida exitosa del escaneo.
+tput cnorm
 exit 0
 
